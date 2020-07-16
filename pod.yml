@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: nginxwebproxy
   labels:
-    role: nginxpod
+    app: nginxpod
 spec:
   containers:
     - name: nginx
