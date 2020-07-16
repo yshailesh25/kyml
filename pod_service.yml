@@ -5,6 +5,7 @@ metadata:
 spec:
   selector:
     app: nginxpod
+  type: NodePort
   ports:
   - protocol: TCP
     port: 80
