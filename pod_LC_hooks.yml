@@ -7,9 +7,15 @@ spec:
   - name: lifecycle-demo-container
     image: nginx
     livenessProbe:
+      exec:
+        command:
+        - "/bin/sh"; "-c"; "echo Hello from the postStart handler > /usr/share/message1"
+      initialDelaySeconds: 5
+      periodSeconds: 5
+    lifecycle:
       postStart:
         exec:
           command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
-      initialDelaySeconds: 5
-      periodSeconds: 5
-   
+      preStop:
+        exec:
+          command: ["/bin/sh","-c","nginx -s quit; while killall -0 nginx; do sleep 1; done"]
