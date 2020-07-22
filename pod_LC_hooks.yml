@@ -6,10 +6,15 @@ spec:
   containers:
   - name: lifecycle-demo-container
     image: nginx
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 60; rm -rf /tmp/healthy; sleep 600
     livenessProbe:
       exec:
         command:
-        - "/bin/sh"; "-c"; "echo Hello from the postStart handler > /usr/share/message1"
+        - cat
+        - /tmp/healthy
       initialDelaySeconds: 5
       periodSeconds: 5
     lifecycle:
